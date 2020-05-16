@@ -1,5 +1,5 @@
-function [xs, ys] = ellips_coords(qVec, qMat, n)
-%ELLIPS_COORDS 
+function [xs, ys] = ellipse_coords(qVec, qMat, n)
+%ELLIPSE_COORDS 
 %   
     default_n = 100;
 
