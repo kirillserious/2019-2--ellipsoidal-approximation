@@ -1,0 +1,125 @@
+\input{formats/report}
+\input{set}
+\input{decl}
+\begin{document}
+\input{title_page/doc}
+\tableofcontents
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+
+
+%%  Document start
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Об эллипсоидах}
+
+\begin{definition}
+        Назовём \textit{эллипсоидом} множество
+$$
+        \mathcal{E}(q,\,Q) = \{
+x \in \setR^n \,:\, \langle x-q,\,Q^{-1}(x-q) \rangle \leqslant 1
+        \},
+        \qquad \mbox{где } Q= Q\T > 0.
+$$
+\end{definition}
+
+\begin{assertion}
+        Опорная функция и опорный вектор эллипсоида имеют вид:
+$$
+        \rho(l\,|\,\Varepsilon(q,\,Q)) =
+        \langle l,\,q \rangle + 
+        \langle l,\,Ql \rangle^{\nicefrac{1}{2}},
+$$
+$$
+        x(l) = q + \frac{Ql}{\langle l,\,Ql\rangle^{\nicefrac12}}.
+$$
+\end{assertion}
+\begin{proof}
+
+Будем доказывать для случая $q = 0$. Иначе --- аналогично.
+
+Так как по определению
+$
+        \rho(l\,|\,A) = \sup_{x\in A}\langle l,\,x\rangle,
+$
+то мы должны решать задачу максимизации скалярного произведения
+$
+        \langle l,\,x \rangle
+$
+при условии, что
+$
+        \langle x,\,Q^{-1}x \rangle = 1.
+$
+Запишем функцию Лагранжа для этой задачи:
+$$
+        \mathcal{L}(l,\,x,\,\lambda)
+        =
+        \langle l,\,x \rangle
+        +
+        \lambda(\langle x,\,Q^{-1}x \rangle - 1).
+$$
+Тогда
+$$
+        \frac{\partial \mathcal{L}}{\partial x}
+        =
+        l + 2\lambda Q^{-1} x 
+        = 0
+        \quad
+        \Longrightarrow
+        \quad
+        x(l) = -\frac{1}{2\lambda}Ql.
+$$
+Подставим получившееся выражение для опорного вектора в условие:
+$$
+        \left\langle
+-\frac{1}{2\lambda}Ql
+,\,
+-\frac{1}{2\lambda}Q^{-1}Ql
+        \right\rangle
+        = 1
+        \;\Longrightarrow\;
+        \lambda
+        =
+        -\frac12 \langle l,\,Ql \rangle^{\nicefrac12}
+        \,\Longrightarrow\,
+        x(l) = \frac{Ql}{\langle l,\,Ql\rangle^{\nicefrac12}}.
+$$
+В таком случае опорная функция в направлении $l \neq 0$ равна
+$$
+        \rho(l\,|\,\Varepsilon(0,\,Q))
+        =
+        \left\langle
+l
+,\,
+\frac{Ql}{\langle l,\,Ql\rangle^{\nicefrac12}}
+        \right\rangle
+        =
+        \langle l,\,Ql \rangle^{\nicefrac{1}{2}}.
+$$
+\end{proof}
+
+\clearpage
+\begin{figure}[t]
+        \centering
+        \input{img/ellipse}
+        \caption{Эллипсоид с центром $q = \protect\begin{bmatrix}1\\2\protect\end{bmatrix}$ и матрицей $Q = \protect\begin{bmatrix}5&3\\3&2\protect\end{bmatrix}.$}
+\end{figure}
+\begin{figure}[b]
+        \centering
+        \input{img/sum_ellipse}
+        \caption{Сумма двух эллипсоидов.}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Document end
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\begin{thebibliography}{9}
+\input{bib}
+\end{thebibliography}
+\end{document}
