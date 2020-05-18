@@ -13,7 +13,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Об эллипсоидах}
+\section{Об эллипсоидах и сумме Минковского}
 
 \begin{definition}
         Назовём \textit{эллипсоидом} множество
@@ -100,6 +100,23 @@ l
 $$
 \end{proof}
 
+\begin{definition}
+        \textit{Суммой Минковского} множеств $A$ и $B$ называется множество
+$$
+        A + B
+        =
+        \{\,
+x = a + b \::\: a \in A,\,b \in B 
+        \,\}.
+$$
+\end{definition}
+
+\begin{assertion}
+        Опорная функция суммы Минковского равна сумме опорных функций каждого из множеств, то есть
+$$
+        \rho\left(l\,\left|\,\sum_{i=1}^n A_i\right.\right) = \sum_{i=1}^n \rho\,(l\,|\,A_i).
+$$
+\end{assertion}
 \clearpage
 \begin{figure}[t]
         \centering
@@ -110,6 +127,94 @@ $$
         \centering
         \input{img/sum_ellipse}
         \caption{Сумма двух эллипсоидов.}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Внешняя оценка суммы эллипсоидов}
+
+\begin{theorem}
+        Для суммы Минковского эллипсоидов справедлива следующая внешняя оценка
+$$
+        \sum\limits_{i=1}^{n} \Varepsilon(q_i,\,Q_i)
+        =
+        \bigcap\limits_{\| l \| = 1} \Varepsilon(q_+(l),\,Q_+(l)),
+$$
+где
+$$
+        \begin{aligned}
+q_+(l) &= \sum_{i=1}^{n} q_i,
+\\
+Q_+(l) &= \sum_{i=1}^n p_i \cdot \sum_{i=1}^{n} \frac{Q_i}{p_i},
+\quad
+\mbox{где }
+p_i = \langle l,\,Q_i l \rangle^{\nicefrac12}.
+        \end{aligned}
+$$
+\end{theorem}
+
+\begin{proof}
+
+Будем доказывать для случая $q_i = 0,$ $i = \overline{1,\,n}$. Случай с произвольными центрами~--- аналогично.
+
+Распишем квадрат опорной функции эллипсоида $\Varepsilon(0,\,Q_+(l))$:
+\begin{multline*}
+        \rho^2(l\,|\,\Varepsilon(0,\,Q_+(l)))
+        =
+        \sum_{i=1}^{n}
+        \langle
+        l,\,Q_il
+        \rangle
+        +
+        \sum_{i < j}
+        \left\langle
+l,\,\left(
+\frac{p_i}{p_j}Q_j + \frac{p_j}{p_i}Q_i
+\right)l
+        \right\rangle
+        \geqslant\\\geqslant
+        \left\{
+\frac{a+b}{2} \geqslant \sqrt{ab}
+        \right\}
+        \geqslant
+        \sum_{i=1}^{n}\langle l,\,Ql \rangle
+        +
+        2\sum_{i < j}
+        \langle l,\,Q_il \rangle^{\nicefrac12}
+        \langle l,\,Q_jl \rangle^{\nicefrac12}
+        =\\=
+        \left(
+\sum_{i=1}^n\langle l,\,Q_il\rangle^{\nicefrac12}
+        \right)^2
+        =
+        \rho^2\left(
+l\left|
+        \sum_{i=1}^n\Varepsilon(0, Q_i)
+\right.
+        \right).
+\end{multline*}
+Таким образом, получили, что для любого $l \neq 0$
+$$
+        \sum_{i=1}^n \Varepsilon(0,\,Q_i) \subseteq \Varepsilon(0,\,Q_+(l)),
+$$
+причем, так как равенство опорных функций достигается при
+$
+        p_i = \langle l,\,Q_i l \rangle^{\nicefrac12},
+$
+то в направлении $l \neq 0$ эллипсоид $\Varepsilon(0,\,Q_+)$ касается суммы $\sum_{i = 0}^{n} \Varepsilon(0,\,Q_i).$
+
+\end{proof}
+
+\clearpage
+\begin{figure}[t]
+        \centering
+        \input{img/outer_sum_10}
+        \caption{Эллипсоидальные аппроксимации для 10 направлений.}
+\end{figure}
+\begin{figure}[b]
+        \centering
+        \input{img/outer_sum_100}
+        \caption{Эллипсоидальные аппроксимации для 100 направлений.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
