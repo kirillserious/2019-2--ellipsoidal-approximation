@@ -216,6 +216,190 @@ $
         \input{img/outer_sum_100}
         \caption{Эллипсоидальные аппроксимации для 100 направлений.}
 \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Внутренняя оценка суммы эллипсоидов}
+
+\begin{definition}
+        \textit{Сингулярным разложением} матрицы $A \in \setR^{n \times m}$ называется представление матрицы в виде
+$$
+        A = V \mathit{\Sigma} U^*, 
+$$
+        где
+$$
+\begin{aligned}
+&V \in \setR^{n \times n}\::\: V^* = V^{-1},\\
+&U \in \setR^{m \times m}\::\: U^* = U^{-1},\\
+&\mathit{\Sigma} = \mathrm{diag}\left(\sigma_1,\,\ldots,\,\sigma_{\min\{n,\,m\}}\right) \in \setR^{n \times m}\::\:\sigma_1 \geqslant \sigma_2 \geqslant \ldots \geqslant \sigma_{\min\{n,\,m\}}.
+\end{aligned}
+$$ 
+\end{definition}
+
+\begin{theorem}
+        Сингулярное разложение
+        $A = V \mathit{\Sigma} U^*$
+        существует для любой комплексной матрицы $A$.
+        Если матрица $A$ вещественная, то матрицы $V$, $\mathit{\Sigma}$ и $U$ также можно выбрать вещественными. 
+\end{theorem}
+
+\begin{theorem}
+        Старшее сингулярное число $\sigma_1$ матрицы $A = V \mathit{\Sigma} U^*$ является её нормой.
+\end{theorem}
+
+\begin{definition}
+        Назовём линейное преобразование $\mathcal{A}$ \textit{ортогональным}, если оно сохраняет скалярное произведение, то есть
+$$
+        \langle \mathcal{A}(x),\,\mathcal{A}(y)\rangle = \langle x,\,y\rangle.
+$$
+\end{definition}
+
+\begin{theorem}\label{th:unitarnost}
+        Необходимым и достаточным условием ортогональности линейного преобразования $\mathcal{A}$ в конечномерном пространстве является унитарность матрицы преобразования $A$, то есть
+$$
+        A^* = A^{-1}.
+$$
+\end{theorem}
+
+\begin{assertion}
+        Для произвольных векторов $a,\,b\in\setR^{n}$ таких, что $\|a\| = \|b\|$, существует матрица ортогонального преобразования, переводящего $a$ в $b$.
+\end{assertion}
+\begin{proof}
+        
+        Построим сингулярное разложение для векторов $a$ и $b$:
+$$
+        a = V_a \mathit{\Sigma}_a u_a,
+        \qquad
+        b = V_b \mathit{\Sigma}_b u_b,
+$$        
+причем $V_a,\,V_b \in \setR^{n \times n}$~--- унитарные матрицы, $u_a,\,u_b\in\{-1,\,1\}\in\setR^1$,
+$$
+        \mathit{\Sigma}_a = [\sigma_a,\,0,\,\ldots,\,0]\T\in\setR^{n \times 1},\quad
+        \mathit{\Sigma}_b = [\sigma_b,\,0,\,\ldots,\,0]\T\in\setR^{n \times 1},\quad
+        \sigma_a,\,\sigma_b > 0.
+$$
+Согласно Теореме~\ref{th:unitarnost} $\sigma_a = \sigma_b$.
+Тогда преобразуем выражение для вектора $b$:
+\begin{multline*}
+        b
+        =
+        V_b \mathit{\Sigma}_b u_b
+        =
+        V_b (V_a\T V_a)\mathit{\Sigma}_b u_b
+        =
+        V_bV_a\T V_a \left( \mathit{\Sigma}_a \frac{\sigma_b}{\sigma_a} \right) \left( u_a\frac{u_b}{u_a} \right)
+        =\\=
+        V_bV_a\T \frac{\sigma_b\cdot u_b}{\sigma_a\cdot u_a}V_a\mathit{\Sigma}_au_a
+        =
+        \left(V_b V_a\T \frac{\sigma_b\cdot u_b}{\sigma_a\cdot u_a}\right)a.
+\end{multline*}
+Так как произведение унитарных матриц есть унитарная матрица, теорема доказана.
+
+\end{proof}
+
+\textbf{Следствие 1.} Далее под ортогональным преобразованием из вектора $a$ в вектор $b$ таких, что $\|a\| = \|b\|$, будем понимать
+$$
+        \mathrm{Orth}(a,\,b) = u_au_bV_bV_a\T.
+$$
+
+\begin{assertion}
+        Для суммы Минковского эллипсоидов справедлива следующая оценка
+$$
+        \sum_{i=1}^n \Varepsilon(q_i,\,Q_i) = 
+        \bigcup\limits_{\|l\|=1}\Varepsilon(q_-(l),\,Q_-(l)),
+$$
+        где
+$$
+        \begin{aligned}
+q_-(l) &= \sum_{i=1}^n q_i,
+\\
+Q_-(l) &= Q_*\T(l) Q_*(l),
+\quad
+Q_*(l) = \sum_{i=1}^{n}S_i(l)Q_i^{\nicefrac12},
+\\
+S_i(l) &= \mathrm{Orth}(Q_i^{\nicefrac12}l,\,\lambda_iQ_1^{\nicefrac12}l),
+\quad
+\lambda_i = \frac{\langle l,\,Q_il\rangle^{\nicefrac12}}{\langle l,\,Q_1l\rangle^{\nicefrac12}}.
+        \end{aligned}
+$$
+\end{assertion}
+
+\begin{proof}
+
+Будем доказывать для случая $q_i = 0$, $i=\overline{1,\,n}$.
+Случай с произвольными центрами~--- аналогично.
+
+Итак рассмотрим эллипсоид $\Varepsilon_- = \Varepsilon(0,\,Q_-)$, $Q_- = Q_*\T Q_*$,
+$$
+        Q_* = \sum_{i=1}^n S_i Q_i^{\nicefrac12},
+$$
+где $S_i$~--- некоторые унитарные матрицы. Распишем квадрат опорной функции этого эллипсоида:
+\begin{multline*}
+        \rho^2(l\,|\,\Varepsilon_-)
+        =
+        \langle l,\,Q_-l \rangle
+        =
+        \langle Q_*l,\,Q_*l \rangle
+        =
+        \sum_{i=1}^n \langle l,\,Q_il \rangle
+        +
+        \sum_{i \neq j} \left \langle
+        S_i Q_i^{\nicefrac12}l,\, S_j Q_j^{\nicefrac12}l
+        \right\rangle
+        \leqslant\\\leqslant
+        \{
+        \mbox{Неравенство Коши--Буняковского}
+        \}
+        \leqslant\\\leqslant
+        \sum_{i=1}^n \langle l,\,Q_il \rangle
+        +
+        \sum_{i \neq j}
+        \langle l,\,Q_il \rangle^{\nicefrac12}
+        \langle l,\,Q_jl \rangle^{\nicefrac12}
+        =
+        \left(
+        \sum_{i=1}^n \langle l,\,Q_il \rangle^{\nicefrac12}
+        \right)^2
+        =
+        \rho^2\left(
+        l\left|
+        \sum_{i=1}^n \Varepsilon(q_i,\,Q_i)
+        \right.
+        \right).
+\end{multline*}
+Таким образом, получили, что $\Varepsilon_-\subseteq\sum_{i=1}^n\Varepsilon(q_i,\,Q_i)$.
+
+Заметим, что равенство в последней формуле при фиксированном направлении $l \neq 0$ достигается при
+$$
+        S_iQ_i^{\nicefrac12}l = \lambda_i S_1Q_1^{\nicefrac12}l, 
+$$
+где $\lambda_i$~--- произвольные неотрицательные константы. Если положить $S_1 = I$, а $\lambda_i$ выбирать, исходя из условий нормировки ($\|Q_i^{\nicefrac12}l\| = \|\lambda_iQ_1^{\nicefrac12}l\|$):
+$$
+        \lambda_i = \frac{\langle l,\,Q_il\rangle^{\nicefrac12}}{\langle l,\,Q_1l\rangle^{\nicefrac12}},
+$$
+то получим утверждение теоремы.
+
+\end{proof}
+\vfill
+\begin{figure}[h]
+
+        \centering
+        \input{img/inner_sum_10}
+        \caption{Эллипсоидальные аппроксимации для 10 направлений.}
+\end{figure}
+\clearpage
+\begin{figure}[t]
+
+        \centering
+        \input{img/inner_sum_100}
+        \caption{Эллипсоидальные аппроксимации для 100 направлений.}
+\end{figure}
+\begin{figure}[b]
+
+        \centering
+        \input{img/outer_and_inner_sum_50}
+        \caption{Эллипсоидальные аппроксимации для 50 направлений.}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
