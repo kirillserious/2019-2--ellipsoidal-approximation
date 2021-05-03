@@ -111,12 +111,37 @@ x = a + b \::\: a \in A,\,b \in B
 $$
 \end{definition}
 
+\begin{remark}
+        Сумма эллипсоидов, вообще говоря, не является эллипсоидом.
+        В этом можно убедиться на следующем примере:
+$$
+        \Varepsilon\left(
+                0,\,
+                \begin{pmatrix}
+                        1 & 0 \\
+                        0 & 0
+                \end{pmatrix}
+        \right)
+        +
+        \Varepsilon\left(
+                0,\,
+                \begin{pmatrix}
+                        0 & 0 \\
+                        0 & 1
+                \end{pmatrix}
+        \right)
+        =
+        [0 ,\, 1] \times [0 ,\, 1].
+$$
+\end{remark}
+
 \begin{assertion}
         Опорная функция суммы Минковского равна сумме опорных функций каждого из множеств, то есть
 $$
         \rho\left(l\,\left|\,\sum_{i=1}^n A_i\right.\right) = \sum_{i=1}^n \rho\,(l\,|\,A_i).
 $$
 \end{assertion}
+
 \clearpage
 \begin{figure}[t]
         \centering

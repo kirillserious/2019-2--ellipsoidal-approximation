@@ -5,5 +5,7 @@
 *.snm
 *.toc
 *converted-to.pdf
-
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 *.m~
