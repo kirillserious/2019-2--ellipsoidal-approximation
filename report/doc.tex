@@ -439,7 +439,7 @@ $$
 $$
 Под интегралом Римана в данном случае понимаем предел последовательности частичных сумм
 $$
-        I_N = \Varepsilon_0 + \sum\limits_{i = 1}^N \Varepsilon(\tau_i)(\tau_{i+1} - \tau_i)
+        I_N = \Varepsilon_0 + \sum\limits_{k = 1}^N \Varepsilon(\tau_k)(\tau_{k+1} - \tau_k)
 $$
 по метрике Хаусдорфа при диаметре $\Delta$ разбиения $t_0 = \tau_1 < \tau_2 < \ldots < \tau_N = t$, стремящемся к нулю независимо от выбора самого разбиения (если, конечно, этот предел существует).
 
@@ -447,6 +447,104 @@ $$
         \textit{Расстоянием Хаусдорфа} между двумя непустыми компактными множествами $X$ и $Y$ называют минимальное число $r$ такое, что замкнутая $r$-окрестность $X$ содержит $Y$, а также замкнутая $r$-окрестность $Y$ содержит $X$.
 \end{remark}
 
+Считаем, что функции~$q(\tau)$ и $Q(\tau)$ непрерывны на отрезке $t_0 \leqslant \tau \leqslant t$, и выберем равномерное разбиение этого отрезка с шагом $\frac{1}{N}$.
+Воспрользуемся тем фактом, что
+$$
+        k \cdot \Varepsilon(q,\,Q) = \Varepsilon(k \cdot q,\, k^2 \cdot Q).
+$$
+Тогда для $N$-ой интегральной суммы мы уже знаем верхнюю оценку $\Varepsilon^+_N = \Varepsilon(q^+_N,\,Q^+_N(l))$. Причём в силу непрерывности
+\begin{equation}\label{eq:q_plus_integral}
+        q^+_N \xrightarrow[N\to\infty]{} q^+ = q_0 + \int\limits_{t_0}^{t}q(\tau)\,d\tau,
+\end{equation}
+\begin{equation}\label{eq:Q_plus_integral}
+        Q^+_N \xrightarrow[N\to\infty]{} Q^+ = \left(p_0 + \int\limits_{t_0}^{t} p(\tau)d \tau \right)\left(\frac{Q_0}{p_0} + \int\limits_{t_0}^t\frac{Q(\tau)}{p(\tau)}\,d\tau\right),
+\end{equation}
+где $p(\tau) = \langle l,\,Q(\tau)l \rangle^{\nicefrac{1}{2}}$, $p_0 = \langle l, Q_0 l \rangle^{\nicefrac{1}{2}}.$
+
+Подведём промежуточный итог: нам уже было известно, что 
+$$
+        \rho(l\,|\,\Varepsilon^+_N[l_0]) \geqslant \rho(l\,|\,I_N)
+        \quad
+        \forall l, l_0 \neq 0,
+$$
+$$
+        \rho(l_0\,|\,\Varepsilon^+_N[l_0]) = \rho(l_0\,|\,I_N)
+        \quad
+        \forall l_0 \neq 0.
+$$
+Теперь же в силу непрерывности опорной функции мы переходим к пределу в этих соотношениях, и получаем
+$$
+        \rho(l\,|\,\Varepsilon^+[l_0]) \geqslant \rho(l\,|\,I)
+        \quad
+        \forall l, l_0 \neq 0,
+$$
+$$
+        \rho(l_0\,|\,\Varepsilon^+[l_0]) = \rho(l_0\,|\,I)
+        \quad
+        \forall l_0 \neq 0,
+$$
+где $\Varepsilon^+[l] = \Varepsilon(q^+,\,Q^+(l))$.
+Таким образом получили, что
+$$
+        I
+        =
+        \Varepsilon_0 + \int\limits_{t_0}^t \Varepsilon(\tau)d\tau
+        =
+        \bigcap\limits_{\| l \| = 1} \Varepsilon^+[l].
+$$
+
+В последнюю очередь мы получим дифференциальные соотношения для параметров оценки~$q+$ и $Q+(l)$. Для этого продифференцируем ранее полученные значения.
+
+Итак из выражения~\eqref{eq:q_plus_integral} для $q^+$ получили следующую задачу~Коши:
+$$
+\begin{aligned}
+        \dot q^+(t) &= q^+(t) \\
+        q(t_0) &= q_0
+\end{aligned}
+$$
+
+Теперь продифференцируем $Q^+$:
+$$
+        \dot Q^+(t) = p(t) \left(
+\frac{Q_0}{p_0} + \int\limits_{t_0}{t}\frac{Q(\tau)}{p(\tau)}\,d\tau
+        \right)
+        +
+        \left(
+p_0 + \int\limits_{t_0}^{t}p(\tau)\,d\tau
+        \right)
+        \frac{Q(t)}{p(t)}.
+$$
+Если ввести обозначение
+$$
+        \pi(t) = \frac{p(t)}{p_0 + \int\limits_{t_0}^{t}p(\tau)\,d\tau},
+$$
+то перейдём к виду
+$$
+        \dot Q^+(t) = \pi(t)Q^+(t) + \frac{1}{\pi(t)}Q(t).
+$$
+Теперь заметим, что
+\begin{multline*}
+        \left\langle l,\,\left(\frac{Q_0}{p_0} + \int\limits_{t_0}^t\frac{Q(\tau)}{p(\tau)}\,d\tau\right) l \right\rangle
+        =
+        \left\langle l,\,\frac{Q_0 l}{\langle l,\,Q_0l \rangle^{\nicefrac{1}{2}}}\right\rangle
+        +
+        \int\limits_{t_0}^t\left\langle l,\,\frac{Q(\tau)l}{\langle l,\,Q(\tau)l\rangle^{\nicefrac{1}{2}}}\right\rangle\,d\tau
+        =\\=
+        p_0 + \int\limits_{t_0}^{t}p(\tau)\,d\tau,
+\end{multline*}
+то есть из выражения~\eqref{eq:Q_plus_integral} следует
+$$
+        p_0 + \int\limits_{t_0}^{t}p(\tau)\,d\tau
+        =
+        \langle l,\, Q^+(t) l \rangle^{\nicefrac{1}{2}}.
+$$
+Таким образом, итоговая задача~Коши для $Q^+$ выглядит так:
+$$
+\begin{aligned}
+        \dot Q^+(t) &= \frac{\langle l,\, Q(t) l \rangle^{\nicefrac{1}{2}}}{\langle l,\, Q^+(t) l \rangle^{\nicefrac{1}{2}}}Q^+(t) + \frac{\langle l,\, Q^+(t) l \rangle^{\nicefrac{1}{2}}}{\langle l,\, Q(t) l \rangle^{\nicefrac{1}{2}}}Q(t) \\
+        Q(t_0) &= Q_0
+\end{aligned}
+$$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
