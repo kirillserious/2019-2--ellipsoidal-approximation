@@ -44,7 +44,7 @@ color2 = [0.8500, 0.3250, 0.0980];
 phiVec = linspace(1, 2*pi, 100);
 for phi = phiVec
     lVec = [cos(phi); sin(phi)];
-    [xs, ys] = outer_ellipse_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
+    [xs, ys] = outer_ellipse_sum_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
     p1 = plot(xs, ys, 'Color', color1);
 end
 
@@ -68,7 +68,7 @@ color2 = [0.8500, 0.3250, 0.0980];
 phiVec = linspace(1, 2*pi, 100);
 for phi = phiVec
     lVec = [cos(phi); sin(phi)];
-    [xs, ys] = inner_ellipse_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
+    [xs, ys] = inner_ellipse_sum_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
     p1 = plot(xs, ys, 'Color', color1);
 end
 
@@ -92,14 +92,11 @@ color2 = [0.8500, 0.3250, 0.0980];
 phiVec = linspace(1, 2*pi, 50);
 for phi = phiVec
     lVec = [cos(phi); sin(phi)];
-    [xs, ys] = outer_ellipse_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
+    [xs, ys] = outer_ellipse_sum_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
     p1 = plot(xs, ys, 'Color', color1);
-    [xs, ys] = inner_ellipse_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
+    [xs, ys] = inner_ellipse_sum_coords(lVec, q1Vec, q1Mat, q2Vec, q2Mat);
     p2 = plot(xs, ys, 'Color', color2);
 end
-
-[xs, ys] = sum_ellipse_coords(q1Vec, q1Mat, q2Vec, q2Mat);
-p2 = plot(xs, ys, 'Color', color2);
 
 xlabel('$$x_1$$', 'interpreter', 'latex');
 ylabel('$$x_2$$', 'interpreter', 'latex');

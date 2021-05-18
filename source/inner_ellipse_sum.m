@@ -1,13 +1,10 @@
-function [xs, ys] = inner_ellipse_coords(l, varargin)
-%INNER_ELLIPSE_COORDS
-    
+function [resultVec, resultMat] = inner_ellipse_sum(l, varargin)
+%INNER_ELLIPSE_SUM
     if mod(nargin, 2) == 0
-        n             = varargin{end};
-        ellipse_count = (nargin - 2) / 2;
-    else
-        n             = 0;
-        ellipse_count = (nargin - 1) / 2;
+        error("Wrong arguments count")
     end
+    
+    ellipse_count = (nargin - 1) / 2;
     
     qVec = varargin{1};
     qMat = varargin{2};
@@ -32,12 +29,7 @@ function [xs, ys] = inner_ellipse_coords(l, varargin)
     end
     
     resultMat = resultMat.' * resultMat;
-    
-    if n == 0
-        [xs, ys] = ellipse_coords(resultVec, resultMat);
-    else
-        [xs, ys] = ellipse_coords(resultVec, resultMat, n);
-    end
+
     
     
     function resultMat = orthogonal_transform(aVec, bVec)
